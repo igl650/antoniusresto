@@ -89,6 +89,10 @@ Quando o Antonius Restô aprovar o site e fornecer as imagens definitivas:
 ```text
 site/
 ├── .gitignore                # Arquivos ignorados pelo repositório Git local
+├── .vercelignore             # Arquivos locais excluídos da implantação
+├── vercel.json               # Runtime PHP e rotas de produção na Vercel
+├── api/
+│   └── index.php            # Entrada da função PHP na Vercel
 ├── app/
 │   ├── config/
 │   │   └── site.php          # Dados da marca, horários, endereço, links oficiais e homologação
@@ -185,6 +189,12 @@ O projeto está versionado em Git e publicado em [github.com/igl650/antoniusrest
   ```powershell
   git status
   ```
+
+### Hospedagem na Vercel
+
+O site modelo está disponível em [antoniusresto.vercel.app](https://antoniusresto.vercel.app). A Vercel executa o PHP 8.3 pela função `api/index.php`, usando o runtime comunitário `vercel-php@0.7.4`; imagens, CSS e JavaScript da pasta `public/assets/` são servidos como arquivos estáticos. A configuração está em `vercel.json`.
+
+O ambiente publicado continua com `noindex, nofollow` e avisos de site modelo. A hospedagem não representa aprovação do restaurante nem liberação para uso como site oficial. Para uma implantação manual da versão local, use `vercel deploy --prod` após autenticar a CLI na conta vinculada ao projeto.
 
 ---
 

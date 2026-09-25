@@ -1,0 +1,5 @@
+.git
+.vercel
+.env*
+test-inspect.html
+public/assets/img/*-nao-oficial.webp
