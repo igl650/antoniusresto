@@ -1,0 +1,19 @@
+# Sistema Operacional
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Arquivos e capturas de teste temporárias
+test-*.png
+test-*.html
+*.log

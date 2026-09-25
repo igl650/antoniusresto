@@ -1,0 +1,879 @@
+/**
+ * Antonius Restô — Folha de Estilos Principal
+ * Baseada no protótipo visual aprovado e na identidade real do restaurante.
+ * Não utiliza frameworks externos; 100% CSS nativo, semântico e responsivo.
+ */
+
+:root {
+  /* Paleta cromática autêntica (terracota profundo, creme e café escuro) */
+  --ink: #2b201c;
+  --ink-soft: #574b45;
+  --ink-muted: #655953;
+  --rust: #803519;
+  --rust-hover: #9a4a2d;
+  --rust-dark: #652811;
+  --cream: #faf7f2;
+  --sand: #eee7df;
+  --sand-card: #f9f5f0;
+  --line: #dfd2c7;
+  --line-card: #e5d9cf;
+  --line-rust: #ae735d;
+  --white: #ffffff;
+  --muted: #776b65;
+  --footer-bg: #251812;
+  --footer-text: #e5d8d1;
+  --focus-ring: #f59e0b;
+
+  /* Tipografia editorial refinada */
+  --font-serif: "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Transições suaves */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset e fundamentos */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  background-color: var(--cream);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Acessibilidade */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Container de largura máxima */
+.wrap {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+/* Tipografia auxiliar */
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block;
+}
+
+.eyebrow-rust {
+  color: var(--rust);
+}
+
+/* Faixa superior institucional */
+.topline {
+  background-color: var(--rust);
+  color: var(--white);
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 0.79rem;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+/* Cabeçalho */
+.header {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+/* Logomarca composta */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 12px;
+  color: var(--rust);
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 2.05rem;
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+
+.brand-name small {
+  display: block;
+  text-align: right;
+  font-size: 0.5em;
+  letter-spacing: 0;
+  margin-top: 5px;
+}
+
+/* Navegação desktop */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 0.9rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 500;
+  padding: 6px 0;
+  transition: color var(--transition-fast);
+}
+
+.nav a:hover {
+  color: var(--rust);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Grupo de ações à direita no cabeçalho */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Botão toggle do menu móvel */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 6px;
+  cursor: pointer;
+  width: 38px;
+  height: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border-radius: 0;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.nav-toggle:hover {
+  background-color: var(--cream);
+  border-color: var(--rust);
+}
+
+.toggle-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--rust);
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Botões */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 20px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  min-height: 48px;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-solid {
+  background-color: var(--rust);
+  color: var(--white);
+}
+
+.button-solid:hover {
+  background-color: var(--rust-hover);
+}
+
+.button-light {
+  background-color: var(--white);
+  color: var(--rust);
+}
+
+.button-light:hover {
+  background-color: #faf5f0;
+}
+
+.button-outline {
+  border: 1px solid var(--white);
+  color: var(--white);
+  background-color: transparent;
+}
+
+.button-outline:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Foco acessível */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+.button-outline:focus-visible,
+.button-light:focus-visible,
+.visit a:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Hero */
+.hero {
+  min-height: 620px;
+  background: linear-gradient(
+      90deg,
+      rgba(22, 11, 6, 0.90) 0%,
+      rgba(22, 11, 6, 0.78) 31%,
+      rgba(22, 11, 6, 0.17) 68%,
+      rgba(22, 11, 6, 0.06) 100%
+    ),
+    url('../img/hero-conceitual.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+}
+
+.hero-content {
+  padding-block: 86px;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 6vw, 6.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  margin: 23px 0;
+  max-width: 720px;
+}
+
+.hero p {
+  max-width: 540px;
+  font-size: 1.13rem;
+  color: #f0eae4;
+  margin: 0 0 30px;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-note {
+  font-size: 0.75rem;
+  color: #ebd8c7;
+  margin-top: 28px;
+  letter-spacing: 0.02em;
+}
+
+/* Barra de Acesso Rápido */
+.quick {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.quick a {
+  padding: 31px 25px;
+  text-decoration: none;
+  border-right: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  transition: background-color var(--transition-fast);
+}
+
+.quick a:first-child {
+  padding-left: 0;
+}
+
+.quick a:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.quick a:hover {
+  background-color: #faf5f0;
+}
+
+.quick strong {
+  display: block;
+  color: var(--rust);
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.quick span {
+  display: block;
+  font-size: 0.83rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.quick b {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--rust);
+  transition: transform var(--transition-fast);
+}
+
+.quick a:hover b {
+  transform: translate(2px, -2px);
+}
+
+/* Seções Gerais */
+.section {
+  padding: 100px 0;
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.intro h2,
+.section-title,
+.visit h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 4vw, 4.8rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 15px 0 0;
+}
+
+.intro-copy {
+  font-size: 1.12rem;
+  max-width: 620px;
+}
+
+.intro-copy p:first-child {
+  margin-top: 4px;
+}
+
+.intro-copy p {
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 17px;
+  color: var(--rust);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--rust);
+  padding-bottom: 5px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.text-link:hover {
+  color: var(--rust-hover);
+  border-color: var(--rust-hover);
+}
+
+/* Seção de Cardápios da Semana */
+.cards-section {
+  background-color: var(--sand);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+
+.section-title {
+  margin-top: 12px;
+}
+
+.section-heading p {
+  max-width: 350px;
+  color: #62564f;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background-color: var(--white);
+  border: 1px solid var(--line-card);
+  padding: 32px;
+  min-height: 235px;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(43, 32, 28, 0.05);
+}
+
+.card .day {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  font-weight: 700;
+}
+
+.card h3 {
+  font-family: var(--font-serif);
+  color: var(--rust);
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 19px 0 12px;
+}
+
+.card p {
+  color: var(--ink-muted);
+  font-size: 0.94rem;
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.card a {
+  color: var(--rust);
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: auto;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Seção Visite */
+.visit {
+  background-color: var(--rust);
+  color: var(--white);
+  padding: 84px 0;
+}
+
+.visit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.visit h2 {
+  margin-bottom: 20px;
+}
+
+.visit-address {
+  font-size: 1.03rem;
+  color: #f1ddd2;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.visit .button-light {
+  margin-top: 10px;
+}
+
+.hours {
+  border-top: 1px solid var(--line-rust);
+  padding-top: 18px;
+  margin-top: 26px;
+}
+
+.hours div {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid var(--line-rust);
+  padding: 9px 0;
+  font-size: 0.98rem;
+}
+
+.hours strong {
+  font-weight: 700;
+}
+
+.hours-note {
+  font-size: 0.83rem;
+  color: #ebd0c2;
+  margin-top: 16px;
+}
+
+/* Rodapé */
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 32px 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.footer a {
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.concept-note {
+  font-size: 0.7rem;
+  color: #d4bfb4;
+}
+
+/* ==========================================================================
+   Breakpoints e Responsividade
+   ========================================================================== */
+
+/* Tablet (até 900px) */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    padding: 20px 24px;
+    gap: 16px;
+    box-shadow: 0 10px 24px rgba(43, 32, 28, 0.08);
+  }
+
+  .nav.is-open {
+    display: flex;
+  }
+
+  .nav a {
+    font-size: 1.05rem;
+    padding: 10px 0;
+    border-bottom: 1px solid #f2ede7;
+  }
+
+  .intro,
+  .visit-grid {
+    gap: 44px;
+  }
+
+  .hero {
+    min-height: 570px;
+    background-position: 60% center;
+  }
+
+  .hero h1 {
+    max-width: 600px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card:last-child {
+    grid-column: 1 / -1;
+    min-height: 190px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+}
+
+/* Mobile (até 650px / 390px) */
+@media (max-width: 650px) {
+  .wrap {
+    width: min(calc(100% - 24px), 1180px);
+  }
+
+  .topline {
+    font-size: 0.70rem;
+    letter-spacing: 0.05em;
+    padding: 6px 8px;
+  }
+
+  .header-inner {
+    min-height: 64px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+    letter-spacing: -0.03em;
+  }
+
+  .brand-name small {
+    margin-top: 1px;
+    font-size: 0.46em;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .header-btn {
+    padding: 6px 9px;
+    font-size: 0.72rem;
+    min-height: 34px;
+  }
+
+  .nav-toggle {
+    width: 34px;
+    height: 34px;
+    padding: 5px;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.10em;
+    line-height: 1.35;
+  }
+
+  .hero {
+    min-height: 560px;
+    background: linear-gradient(
+        90deg,
+        rgba(22, 11, 6, 0.88) 0%,
+        rgba(22, 11, 6, 0.44) 100%
+      ),
+      url('../img/hero-conceitual.png') 60% center/cover no-repeat;
+  }
+
+  .hero-content {
+    padding-block: 50px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 9.5vw, 3.2rem);
+    line-height: 1.0;
+    margin: 16px 0;
+  }
+
+  .hero p {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin-bottom: 22px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .hero-cta {
+    width: 100%;
+    min-height: 48px;
+    font-size: 0.88rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-note {
+    margin-top: 20px;
+    font-size: 0.70rem;
+    line-height: 1.4;
+  }
+
+  .quick-grid,
+  .intro,
+  .cards,
+  .visit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick a,
+  .quick a:first-child,
+  .quick a:last-child {
+    padding: 20px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .quick a:last-child {
+    border-bottom: 0;
+  }
+
+  .intro h2,
+  .section-title,
+  .visit h2 {
+    font-size: 2.75rem;
+    line-height: 1.08;
+  }
+
+  .section-heading {
+    display: block;
+  }
+
+  .section-heading p {
+    margin-top: 12px;
+    font-size: 0.92rem;
+  }
+
+  .cards {
+    gap: 12px;
+  }
+
+  .card,
+  .card:last-child {
+    grid-column: auto;
+    min-height: 200px;
+    padding: 24px 20px;
+  }
+
+  .visit {
+    padding: 60px 0;
+  }
+
+  .map-button {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .footer-inner {
+    display: block;
+  }
+
+  .footer-inner > * {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+/* Preferência por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .button:hover,
+  .card:hover,
+  .quick a:hover b {
+    transform: none !important;
+  }
+}
