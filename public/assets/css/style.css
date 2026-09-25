@@ -1,11 +1,11 @@
 /**
- * Antonius Restô — Folha de Estilos Principal
- * Baseada no protótipo visual aprovado e na identidade real do restaurante.
+ * Antonius Restô — Folha de Estilos Principal (Evolução Comercial Premium)
+ * Baseada no protótipo visual aprovado e na identidade autêntica do restaurante.
  * Não utiliza frameworks externos; 100% CSS nativo, semântico e responsivo.
  */
 
 :root {
-  /* Paleta cromática autêntica (terracota profundo, creme e café escuro) */
+  /* Paleta cromática autêntica (terracota profundo, creme, areia e café escuro) */
   --ink: #2b201c;
   --ink-soft: #574b45;
   --ink-muted: #655953;
@@ -20,7 +20,8 @@
   --line-rust: #ae735d;
   --white: #ffffff;
   --muted: #776b65;
-  --footer-bg: #251812;
+  --footer-bg: #20140e;
+  --footer-border: #38241b;
   --footer-text: #e5d8d1;
   --focus-ring: #f59e0b;
 
@@ -79,6 +80,28 @@ img {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Link de salto acessível */
+.skip-link {
+  position: absolute;
+  top: -120px;
+  left: 16px;
+  background-color: var(--rust);
+  color: var(--white);
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  z-index: 10000;
+  transition: top var(--transition-fast);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 /* Container de largura máxima */
@@ -166,7 +189,7 @@ img {
 .nav {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 26px;
   font-size: 0.9rem;
 }
 
@@ -175,6 +198,9 @@ img {
   color: var(--ink);
   font-weight: 500;
   padding: 6px 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   transition: color var(--transition-fast);
 }
 
@@ -192,7 +218,7 @@ img {
   flex-shrink: 0;
 }
 
-/* Botão toggle do menu móvel (área de toque confortável de pelo menos 44x44px) */
+/* Botão toggle do menu móvel */
 .nav-toggle {
   display: none;
   background: transparent;
@@ -291,6 +317,17 @@ img {
   background-color: rgba(255, 255, 255, 0.12);
 }
 
+.button-outline-light {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: var(--white);
+  background-color: transparent;
+}
+
+.button-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--white);
+}
+
 /* Foco acessível */
 a:focus-visible,
 button:focus-visible {
@@ -299,6 +336,7 @@ button:focus-visible {
 }
 
 .button-outline:focus-visible,
+.button-outline-light:focus-visible,
 .button-light:focus-visible,
 .visit a:focus-visible {
   outline: 2px solid var(--focus-ring);
@@ -375,6 +413,7 @@ button:focus-visible {
   justify-content: space-between;
   gap: 20px;
   align-items: center;
+  min-height: 44px;
   transition: background-color var(--transition-fast);
 }
 
@@ -423,10 +462,11 @@ button:focus-visible {
   padding: 100px 0;
 }
 
+/* A Casa & Experiência */
 .intro {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 100px;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 80px;
   align-items: start;
 }
 
@@ -439,6 +479,35 @@ button:focus-visible {
   line-height: 1.06;
   letter-spacing: -0.025em;
   margin: 15px 0 0;
+}
+
+.intro-badges {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.intro-badge {
+  background-color: var(--sand-card);
+  border-left: 3px solid var(--rust);
+  padding: 14px 18px;
+  border-radius: 0 4px 4px 0;
+}
+
+.intro-badge strong {
+  display: block;
+  color: var(--rust);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+.intro-badge span {
+  color: var(--ink-soft);
+  font-size: 0.90rem;
+  line-height: 1.45;
 }
 
 .intro-copy {
@@ -464,6 +533,8 @@ button:focus-visible {
   text-decoration: none;
   border-bottom: 1.5px solid var(--rust);
   padding-bottom: 5px;
+  min-height: 44px;
+  line-height: 38px;
   transition: color var(--transition-fast), border-color var(--transition-fast);
 }
 
@@ -472,7 +543,7 @@ button:focus-visible {
   border-color: var(--rust-hover);
 }
 
-/* Seção de Cardápios da Semana */
+/* Seção de Cardápios & Destaques Gastronômicos */
 .cards-section {
   background-color: var(--sand);
 }
@@ -482,7 +553,7 @@ button:focus-visible {
   justify-content: space-between;
   gap: 30px;
   align-items: flex-end;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 .section-title {
@@ -490,13 +561,14 @@ button:focus-visible {
 }
 
 .section-heading p {
-  max-width: 350px;
+  max-width: 420px;
   color: #62564f;
   margin: 0;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
+/* Grade de Campanhas Ativas (quando habilitadas) */
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -551,9 +623,306 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  min-height: 44px;
 }
 
 .card a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Grade Editorial de Destaques da Cozinha Contemporânea (Oficial) */
+.menu-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.showcase-card {
+  background-color: var(--white);
+  border: 1px solid var(--line-card);
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.showcase-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(43, 32, 28, 0.06);
+}
+
+.showcase-tag {
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  font-weight: 700;
+}
+
+.showcase-title {
+  font-family: var(--font-serif);
+  color: var(--rust);
+  font-size: 2.1rem;
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 16px 0 12px;
+}
+
+.showcase-desc {
+  color: var(--ink-muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+  margin: 0 0 20px;
+}
+
+.showcase-divider {
+  height: 1px;
+  background-color: var(--line);
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.showcase-dishes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.showcase-dishes li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.96rem;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.showcase-dishes .bullet {
+  color: var(--rust);
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+
+.dish-name {
+  font-weight: 500;
+}
+
+/* Banner Unificado de Ação para o Cardápio Oficial Completo */
+.menu-banner-cta {
+  background-color: var(--white);
+  border: 1px solid var(--line-card);
+  border-left: 4px solid var(--rust);
+  margin-top: 28px;
+  padding: 34px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 36px;
+}
+
+.menu-banner-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--rust);
+  margin-bottom: 8px;
+}
+
+.menu-banner-info h3 {
+  font-family: var(--font-serif);
+  color: var(--ink);
+  font-size: 1.85rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+.menu-banner-info p {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 660px;
+}
+
+.menu-unified-btn {
+  min-height: 52px;
+  padding: 16px 28px;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+/* Seção O Casarão & Espaços */
+.spaces-section {
+  background-color: var(--cream);
+  border-top: 1px solid var(--line);
+}
+
+.spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.space-card {
+  background-color: var(--white);
+  border: 1px solid var(--line-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.space-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(43, 32, 28, 0.06);
+}
+
+.space-visual-frame {
+  background: linear-gradient(135deg, #32221b 0%, #4a2c20 100%);
+  color: var(--cream);
+  min-height: 270px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+.space-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 36%;
+  transform: scale(1.04);
+}
+
+.space-card:nth-child(2) .space-photo {
+  object-position: center 52%;
+}
+
+.space-card:nth-child(3) .space-photo {
+  object-position: center 48%;
+}
+
+.space-visual-frame::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(24, 14, 10, 0.03) 20%, rgba(24, 14, 10, 0.82) 100%);
+  pointer-events: none;
+}
+
+.space-frame-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.space-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.space-frame-label {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: #faf5f0;
+  line-height: 1.2;
+}
+
+.space-frame-sub {
+  font-size: 0.78rem;
+  color: #ebd0c2;
+  letter-spacing: 0.04em;
+}
+
+.space-conceptual-tag {
+  align-self: flex-start;
+  background: rgba(22, 11, 6, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f7ebe4;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  text-transform: uppercase;
+}
+
+.space-content {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.space-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rust);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.space-content h3 {
+  font-family: var(--font-serif);
+  color: var(--ink);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.22;
+  margin: 0 0 12px;
+}
+
+.space-content p {
+  color: var(--ink-soft);
+  font-size: 0.93rem;
+  line-height: 1.55;
+  margin: 0 0 18px;
+}
+
+.space-meta {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--sand);
+}
+
+.space-meta span {
+  background-color: var(--sand-card);
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  padding: 4px 9px;
+  border-radius: 2px;
+}
+
+.spaces-notice {
+  margin-top: 36px;
+  background-color: var(--sand-card);
+  border-left: 3px solid var(--line-rust);
+  padding: 16px 20px;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.spaces-notice a {
+  color: var(--rust);
+  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -562,35 +931,67 @@ button:focus-visible {
 .visit {
   background-color: var(--rust);
   color: var(--white);
-  padding: 84px 0;
+  padding: 90px 0;
 }
 
 .visit-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 100px;
+  gap: 80px;
   align-items: start;
 }
 
 .visit h2 {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+}
+
+.visit-location-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  color: #faf0e8;
 }
 
 .visit-address {
-  font-size: 1.03rem;
+  font-style: normal;
+  font-size: 1.05rem;
   color: #f1ddd2;
   line-height: 1.6;
-  margin: 0 0 24px;
+  margin: 0 0 18px;
 }
 
-.visit .button-light {
-  margin-top: 10px;
+.visit-address strong {
+  color: var(--white);
+}
+
+.visit-desc {
+  color: #f1ddd2;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+
+.visit-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 380px;
+}
+
+.map-button {
+  width: 100%;
+  min-height: 48px;
 }
 
 .hours {
   border-top: 1px solid var(--line-rust);
   padding-top: 18px;
-  margin-top: 26px;
+  margin-top: 24px;
 }
 
 .hours div {
@@ -598,7 +999,7 @@ button:focus-visible {
   justify-content: space-between;
   gap: 15px;
   border-bottom: 1px solid var(--line-rust);
-  padding: 9px 0;
+  padding: 10px 0;
   font-size: 0.98rem;
 }
 
@@ -610,32 +1011,197 @@ button:focus-visible {
   font-size: 0.83rem;
   color: #ebd0c2;
   margin-top: 16px;
+  line-height: 1.45;
 }
 
-/* Rodapé */
+.visit-contact-card {
+  margin-top: 26px;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid var(--line-rust);
+  padding: 20px 22px;
+}
+
+.visit-contact-card h4 {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #faf0e8;
+}
+
+.visit-contact-card p {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  color: #ebd0c2;
+  line-height: 1.5;
+}
+
+.visit-social-link {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.90rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.visit-social-link:hover {
+  color: #faf0e8;
+}
+
+/* Rodapé Completo em Múltiplas Colunas */
 .footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
-  padding: 32px 0;
+  padding: 70px 0 36px;
+  border-top: 1px solid var(--footer-border);
 }
 
-.footer-inner {
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-col-brand {
   display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  align-items: center;
-  font-size: 0.82rem;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.footer a {
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--white);
+  text-decoration: none;
+  min-height: 44px;
+}
+
+.footer-brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+}
+
+.footer-brand-title small {
+  display: block;
+  text-align: right;
+  font-size: 0.48em;
+  margin-top: 3px;
+  letter-spacing: 0;
+}
+
+.footer-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #c9b7ae;
+  margin: 0;
+}
+
+.footer-address {
+  font-style: normal;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #ebd0c2;
+  margin-top: 4px;
+}
+
+.footer-heading {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--white);
+  font-weight: 700;
+  margin: 0 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #3d271c;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links li a {
+  color: #d8c6bd;
+  font-size: 0.90rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.footer-links li a:hover {
   color: var(--white);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-.concept-note {
-  font-size: 0.7rem;
-  color: #d4bfb4;
+.footer-hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-hour-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.86rem;
+  border-bottom: 1px solid #38241b;
+  padding-bottom: 6px;
+}
+
+.footer-hour-item span {
+  color: #c9b7ae;
+}
+
+.footer-hour-item strong {
+  color: var(--white);
+}
+
+.footer-hours-note {
+  font-size: 0.78rem;
+  color: #a8948b;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+.footer-bottom {
+  border-top: 1px solid #38241b;
+  padding-top: 26px;
+}
+
+.footer-bottom-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-copy {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #c9b7ae;
+}
+
+.footer-concept-note {
+  margin: 0;
+  font-size: 0.74rem;
+  color: #a8948b;
+  max-width: 650px;
+  line-height: 1.5;
 }
 
 /* ==========================================================================
@@ -644,6 +1210,19 @@ button:focus-visible {
 
 /* Tablet (até 900px) */
 @media (max-width: 900px) {
+  .header-inner {
+    min-height: 76px;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-name {
+    font-size: 1.6rem;
+  }
+
   /* Quando JavaScript está ATIVO (.js): menu recolhível controlado pelo botão */
   .js .nav-toggle {
     display: inline-flex;
@@ -725,7 +1304,7 @@ button:focus-visible {
 
   .intro,
   .visit-grid {
-    gap: 44px;
+    gap: 48px;
   }
 
   .hero {
@@ -737,24 +1316,44 @@ button:focus-visible {
     max-width: 600px;
   }
 
+  .menu-showcase-grid,
+  .spaces-grid,
   .cards {
     grid-template-columns: 1fr 1fr;
   }
 
+  .showcase-card:last-child,
+  .space-card:last-child,
   .card:last-child {
     grid-column: 1 / -1;
-    min-height: 190px;
+  }
+
+  .menu-banner-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px;
+    gap: 20px;
+  }
+
+  .menu-unified-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
   }
 
   .section {
-    padding: 72px 0;
+    padding: 76px 0;
   }
 }
 
 /* Mobile (até 650px / 390px / 320px) */
 @media (max-width: 650px) {
   .wrap {
-    width: min(calc(100% - 20px), 1180px);
+    width: min(calc(100% - 24px), 1180px);
   }
 
   .topline {
@@ -765,25 +1364,29 @@ button:focus-visible {
 
   .header-inner {
     min-height: 64px;
-    gap: 6px;
+    gap: 8px;
     justify-content: space-between;
   }
 
   .brand {
-    gap: 6px;
+    gap: 8px;
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+    flex-shrink: 1;
+    min-width: 0;
   }
 
   .brand-mark {
     width: 24px;
     height: 24px;
+    flex-shrink: 0;
   }
 
   .brand-name {
-    font-size: clamp(1.05rem, 5vw, 1.25rem);
+    font-size: clamp(1.05rem, 4.4vw, 1.25rem);
     letter-spacing: -0.03em;
+    white-space: nowrap;
   }
 
   .brand-name small {
@@ -795,17 +1398,19 @@ button:focus-visible {
     gap: 6px;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
   }
 
   /* Área de toque de pelo menos 44x44px garantida */
   .header-btn {
     padding: 0 10px;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     min-height: 44px;
     min-width: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
   }
 
   .nav-toggle {
@@ -834,11 +1439,11 @@ button:focus-visible {
   }
 
   .hero-content {
-    padding-block: 50px;
+    padding-block: 52px;
   }
 
   .hero h1 {
-    font-size: clamp(2.6rem, 9.5vw, 3.2rem);
+    font-size: clamp(2.5rem, 9.2vw, 3.2rem);
     line-height: 1.0;
     margin: 16px 0;
   }
@@ -872,8 +1477,11 @@ button:focus-visible {
 
   .quick-grid,
   .intro,
+  .menu-showcase-grid,
+  .spaces-grid,
   .cards,
-  .visit-grid {
+  .visit-grid,
+  .footer-grid {
     grid-template-columns: 1fr;
   }
 
@@ -892,7 +1500,7 @@ button:focus-visible {
   .intro h2,
   .section-title,
   .visit h2 {
-    font-size: 2.75rem;
+    font-size: 2.5rem;
     line-height: 1.08;
   }
 
@@ -903,21 +1511,47 @@ button:focus-visible {
   .section-heading p {
     margin-top: 12px;
     font-size: 0.92rem;
+    max-width: 100%;
   }
 
-  .cards {
-    gap: 12px;
-  }
-
+  .showcase-card,
+  .showcase-card:last-child,
+  .space-card,
+  .space-card:last-child,
   .card,
   .card:last-child {
     grid-column: auto;
-    min-height: 200px;
+    padding: 26px 20px;
+  }
+
+  .menu-banner-cta {
     padding: 24px 20px;
+    margin-top: 20px;
+  }
+
+  .menu-banner-info h3 {
+    font-size: 1.55rem;
+  }
+
+  .menu-unified-btn {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .space-visual-frame {
+    min-height: 260px;
+    padding: 20px;
+  }
+
+  .space-content {
+    padding: 22px 18px;
   }
 
   .visit {
-    padding: 60px 0;
+    padding: 64px 0;
   }
 
   .map-button {
@@ -925,13 +1559,27 @@ button:focus-visible {
     min-height: 48px;
   }
 
-  .footer-inner {
-    display: block;
+  .visit-actions {
+    max-width: 100%;
   }
 
-  .footer-inner > * {
-    display: block;
-    margin-bottom: 10px;
+  .footer {
+    padding: 48px 0 28px;
+  }
+
+  .footer-grid {
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .footer-links li a {
+    min-height: 44px;
+    font-size: 0.92rem;
+  }
+
+  .footer-bottom-info {
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
@@ -951,12 +1599,12 @@ button:focus-visible {
   }
 
   .brand-mark {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 
   .brand-name {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
 
   .header-actions {
@@ -993,6 +1641,8 @@ button:focus-visible {
 
   .button:hover,
   .card:hover,
+  .showcase-card:hover,
+  .space-card:hover,
   .quick a:hover b {
     transform: none !important;
   }

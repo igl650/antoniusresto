@@ -40,28 +40,40 @@ return [
         'nota_pendencia' => 'Aguardando confirmação do horário oficial vigente com o restaurante.',
     ],
 
-    // Destaques do cardápio oficial exibidos quando as campanhas temáticas estiverem desativadas
+    // Destaques gastronômicos confirmados do cardápio oficial (PDF de 7 páginas da casa)
     'destaques_oficial' => [
         [
-            'categoria' => 'ENTRADAS & CRIAÇÕES',
-            'titulo' => 'Entradas da casa',
-            'resumo' => 'Burrata Antonius, souvlaki de couve-flor, croquetas de fumeiro e preparações leves para iniciar a refeição.',
-            'url' => 'https://drive.google.com/file/d/1vJUqIOI3K9jipKR2vPo8jun9JJNsMkV5/view?usp=sharing',
-            'cta' => 'Ver no cardápio oficial ↗',
+            'categoria' => 'ENTRADAS & COMPARTILHAR',
+            'titulo' => 'Entradas da Casa',
+            'descricao' => 'Preparações autorais e combinações aromáticas pensadas para despertar o paladar e abrir a refeição.',
+            'itens' => [
+                'Burrata Antonius',
+                'Souvlaki de couve-flor',
+                'Croquetas de fumeiro',
+                'Saladas',
+            ],
         ],
         [
             'categoria' => 'PRATOS PRINCIPAIS',
             'titulo' => 'Cortes, Peixes e Massas',
-            'resumo' => 'Receitas contemporâneas e regionais como Casa Sertão, Surubim Peba, Terra dos Impossíveis e lasanha Antonius.',
-            'url' => 'https://drive.google.com/file/d/1vJUqIOI3K9jipKR2vPo8jun9JJNsMkV5/view?usp=sharing',
-            'cta' => 'Ver no cardápio oficial ↗',
+            'descricao' => 'O encontro da gastronomia contemporânea com referências regionais marcantes do São Francisco e do Sertão.',
+            'itens' => [
+                'Casa Sertão',
+                'Surubim Peba',
+                'Terra dos Impossíveis',
+                'Lasanha Antonius',
+            ],
         ],
         [
             'categoria' => 'SOBREMESAS & ADEGA',
-            'titulo' => 'Vinhos e Sobremesas',
-            'resumo' => 'Torta basca, panacota de cumaru, cartola arretada e rótulos de vinhos selecionados para acompanhar cada ocasião.',
-            'url' => 'https://drive.google.com/file/d/1vJUqIOI3K9jipKR2vPo8jun9JJNsMkV5/view?usp=sharing',
-            'cta' => 'Ver no cardápio oficial ↗',
+            'titulo' => 'Sobremesas e Carta de Vinhos',
+            'descricao' => 'Criações doces memoráveis e uma curadoria cuidadosa de rótulos para harmonizar cada momento.',
+            'itens' => [
+                'Torta basca',
+                'Panacota de cumaru',
+                'Cartola arretada',
+                'Rótulos selecionados e drinks',
+            ],
         ],
     ],
 
