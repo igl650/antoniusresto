@@ -1,10 +1,10 @@
 # Antonius Restô — Site Modelo Executável
 
-Versão executável, responsiva e independente do site institucional do **Antonius Restô**, desenvolvida em PHP 8.2+, HTML5 semântico, CSS próprio e JavaScript leve para aprimoramento progressivo.
+Versão executável, responsiva e independente do site institucional do **Antonius Restô**, desenvolvida em PHP 8.2+, HTML5 semântico, CSS próprio e JavaScript nativo para aprimoramento progressivo.
 
-O projeto é baseado nas pesquisas de `plano-e-pesquisa.md` e na direção visual de `prototipo-visual.html`. Não utiliza frameworks CSS ou JavaScript (como Bootstrap, Tailwind, jQuery ou React), banco de dados, CMS ou sistemas externos de rastreamento/analytics. 
+O projeto é baseado nas pesquisas de `plano-e-pesquisa.md` e na direção visual de `prototipo-visual.html`. Não utiliza frameworks CSS ou JavaScript (como Bootstrap, Tailwind, jQuery ou React), banco de dados, CMS ou sistemas externos de rastreamento/analytics.
 
-> **Sobre o carregamento tipográfico externo:** A única requisição externa do projeto é o carregamento das famílias tipográficas **Google Fonts** (`DM Sans` e `Libre Caslon Display`) via tags `<link>` otimizadas no cabeçalho. Essa escolha foi mantida no modelo para assegurar fidelidade visual aos mockups aprovados sem sobrecarregar o repositório local com fontes binárias. A folha de estilos declara fallbacks nativos (`Georgia, serif` e `system-ui, Arial, sans-serif`) caso a conexão externa esteja indisponível. Para uma eventual publicação offline autônoma, as fontes WOFF2 podem ser baixadas e hospedadas diretamente em `public/assets/fonts/`.
+> **Carregamento tipográfico externo:** A única requisição externa do projeto é o carregamento das famílias tipográficas **Google Fonts** (`DM Sans` e `Libre Caslon Display`) via tags `<link>` no cabeçalho. Essa escolha foi mantida no modelo para assegurar fidelidade visual aos mockups aprovados sem sobrecarregar o repositório local com arquivos binários de fontes. A folha de estilos declara fallbacks nativos (`Georgia, serif` e `system-ui, Arial, sans-serif`) caso a rede esteja indisponível. Para uma eventual publicação offline autônoma, os arquivos WOFF2 podem ser baixados e hospedados localmente em `public/assets/fonts/`.
 
 ---
 
@@ -20,13 +20,12 @@ Nesta máquina, o PHP 8.3 foi instalado via WinGet. No Windows, novos pacotes Wi
    ```powershell
    php -v
    ```
-2. **Se o comando `php` não for reconhecido**, execute o comando abaixo para recarregar o PATH na sessão atual do PowerShell:
+2. **Se o comando `php` não for reconhecido**, recarregue o PATH na sessão atual do PowerShell:
    ```powershell
    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
    ```
 3. **Localização física do executável via WinGet (caso queira chamar diretamente):**
    ```powershell
-   # Caminho padrão da versão instalada pelo WinGet
    & "$env:LOCALAPPDATA\Microsoft\WinGet\Packages\PHP.PHP.8.3_Microsoft.Winget.Source_8wekyb3d8bbwe\php.exe" -v
    ```
 4. **Adicionar permanentemente ao PATH do usuário (opcional):**
@@ -47,7 +46,7 @@ Nesta máquina, o PHP 8.3 foi instalado via WinGet. No Windows, novos pacotes Wi
    ```powershell
    & "$env:LOCALAPPDATA\Microsoft\WinGet\Packages\PHP.PHP.8.3_Microsoft.Winget.Source_8wekyb3d8bbwe\php.exe" -S localhost:8000 -t public
    ```
-3. Abra seu navegador em:
+3. Acesse no navegador:
    ```text
    http://localhost:8000
    ```
@@ -60,9 +59,9 @@ Nesta máquina, o PHP 8.3 foi instalado via WinGet. No Windows, novos pacotes Wi
 Como este projeto é um **modelo independente** contendo fotografia e logotipo provisórios, ele possui travas de segurança ativas para evitar indexação acidental como site oficial nos motores de busca (Google, Bing):
 
 1. **Meta Robots `noindex, nofollow`:**
-   Declarada em `app/config/site.php` e renderizada na `<head>` do documento, instruindo os rastreadores a não indexarem nem seguirem os links da página.
+   Declarada em `app/config/site.php` (`'robots' => 'noindex, nofollow'`) e emitida na tag `<head>` do documento, instruindo os robôs de busca a não indexarem nem seguirem os links da página.
 2. **Dados Estruturados `Restaurant` Condicionados:**
-   O schema JSON-LD com os dados confirmados de endereço, coordenadas geográficas, horários e culinária foi mantido integralmente em `app/views/partials/header.php`, porém sua impressão no HTML fica **inativa por padrão** (`'enable_schema_restaurant' => false`), impedindo que buscadores criem fichas institucionais automáticas sem validação da casa.
+   O schema JSON-LD com os dados confirmados de endereço, coordenadas geográficas, horários e culinária foi mantido integralmente em `app/views/partials/header.php`, porém sua impressão no HTML fica **inativa por padrão** (`'approved' => false` e `'enable_schema_restaurant' => false`), impedindo que buscadores criem fichas institucionais automáticas sem validação formal da casa.
 
 ### Como Homologar para Publicação Oficial (Após Validação do Restaurante)
 Quando o Antonius Restô aprovar o site e fornecer as imagens definitivas:
@@ -91,22 +90,22 @@ site/
 ├── .gitignore                # Arquivos ignorados pelo repositório Git local
 ├── app/
 │   ├── config/
-│   │   └── site.php          # Dados da marca, horários, endereço, links oficiais e homologação
+│   │   └── site.php          # Dados da marca, horários, endereço, links oficiais e flags de publicação
 │   ├── data/
 │   │   └── cardapios.php     # Links oficiais e chaves de ativação dos menus e campanhas
 │   └── views/
 │       └── partials/
-│           ├── header.php    # Marca, noindex, navegação acessível e Schema.org condicional
+│           ├── header.php    # Marca, meta robots, navegação acessível e Schema.org condicional
 │           └── footer.php    # Rodapé institucional, links oficiais e aviso de conceito
 ├── public/
 │   ├── assets/
 │   │   ├── css/
-│   │   │   └── style.css     # CSS autoral responsivo (390px, 768px, 1440px) com variáveis nativas
+│   │   │   └── style.css     # CSS autoral responsivo (320px, 390px, 768px, 1440px) com variáveis nativas
 │   │   ├── img/
 │   │   │   ├── hero-conceitual.png # Imagem gastronômica ilustrativa provisória
 │   │   │   └── logo-linkme.png     # Símbolo provisório do Linkme.bio
 │   │   └── js/
-│   │       └── main.js       # Comportamento acessível do menu mobile (toggle, Escape, foco)
+│   │       └── main.js       # Comportamento do menu mobile (toggle, Escape, foco, clique externo)
 │   └── index.php             # Página inicial com renderização dinâmica e escape de saída
 └── README.md                 # Documentação e instruções operacionais
 ```
@@ -122,7 +121,7 @@ Por diretriz editorial e rigor factual, **todas as campanhas temáticas e o Happ
 - **Taça Dobrada, Rolha Free e Happy Hour Fim de Semana:** Desativados por padrão (`'ativo' => false`).
 
 ### Seção "Sabores da Semana" com Campanhas Desativadas
-Com as campanhas inativas, a seção não fica vazia nem quebra: ela exibe 3 pilares da gastronomia da casa (*Entradas da casa*, *Cortes, Peixes e Massas* e *Vinhos e Sobremesas*), direcionando o visitante de forma transparente para o **Cardápio Oficial**.
+Com as campanhas inativas, a seção exibe 3 pilares da culinária da casa (*Entradas da casa*, *Cortes, Peixes e Massas* e *Vinhos e Sobremesas*), direcionando o visitante de forma transparente para o **Cardápio Oficial**.
 
 ### Como Reativar uma Campanha Após Confirmação
 Basta abrir `site/app/data/cardapios.php` e alterar o campo `'ativo'` para `true`:
@@ -140,14 +139,14 @@ Basta abrir `site/app/data/cardapios.php` e alterar o campo `'ativo'` para `true
 ### A. Trocar a Imagem de Abertura (Hero)
 A referência à imagem de abertura está centralizada em uma única variável CSS:
 1. Salve a foto oficial em `site/public/assets/img/` (ex: `fachada-oficial.jpg`).
-2. Em `site/public/assets/css/style.css`, altere apenas a variável `--hero-bg-image` em `:root`:
+2. Em `site/public/assets/css/style.css`, altere apenas a variável `--hero-bg-image` declarada em `:root`:
    ```css
    :root {
        ...
        --hero-bg-image: url('../img/fachada-oficial.jpg');
    }
    ```
-   *(A mesma declaração abastece automaticamente as versões desktop e mobile).*
+   *(A mesma declaração abastece as regras de desktop e de dispositivos móveis).*
 3. Em `site/public/index.php`, remova a div `<div class="hero-note" role="note">...</div>`.
 
 ### B. Trocar o Símbolo Provisório pelo Logotipo Vetorial Oficial
@@ -165,12 +164,13 @@ A referência à imagem de abertura está centralizada em uma única variável C
        'whatsapp' => 'https://wa.me/5587999999999',
    ],
    ```
-2. Adicione o botão de reserva apontando para `<?= e_url($config['links']['whatsapp']) ?>`.
+2. Adicione o botão de contato/reserva apontando para `<?= e_url($config['links']['whatsapp']) ?>`.
 
-### D. Funcionamento da Navegação Mobile (Com e Sem JavaScript)
-O cabeçalho foi construído com aprimoramento progressivo (*progressive enhancement*):
-- **Com JavaScript:** Exibe botão hamburguer com toque confortável (mínimo de 44×44 px), atributos `aria-expanded` dinâmicos, fechamento via tecla `Escape` e fechamento ao clicar fora do menu.
-- **Sem JavaScript:** A classe `.no-js` oculta o botão inoperante e exibe a lista de navegação diretamente no fluxo do cabeçalho em telas de até 900 px, garantindo acessibilidade e navegação completa sem quebras de layout.
+### D. Funcionamento da Navegação Mobile e Aprimoramento Progressivo
+O cabeçalho foi implementado com aprimoramento progressivo (*progressive enhancement*):
+- **Sem JavaScript:** A navegação permanece funcional por padrão. A classe `.no-js` oculta o botão de menu inoperante e exibe os links de navegação diretamente no fluxo do cabeçalho em telas de até 900 px, com quebras de linha limpas e sem sobreposições.
+- **Com JavaScript:** O script na `<head>` ativa a classe `.js`. O botão hamburguer torna-se visível, controlando o menu recolhível via atributo `aria-expanded`. O fechamento ocorre ao clicar no botão, ao pressionar a tecla `Escape` (retornando o foco ao botão), ao clicar fora do cabeçalho ou ao selecionar qualquer link interno de navegação.
+- **Área de Toque Mobile:** Os controles principais do cabeçalho móvel (botão do menu, botão do Instagram e link da marca) possuem área de toque de pelo menos 44 × 44 px, dimensionados para evitar quebras ou rolagem horizontal em larguras a partir de 320 px.
 
 ---
 

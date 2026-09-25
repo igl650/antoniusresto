@@ -55,9 +55,10 @@ $schemaRestaurant = [
 ];
 ?>
 <!doctype html>
-<html lang="<?= e($config['seo']['lang']) ?>">
+<html class="no-js" lang="<?= e($config['seo']['lang']) ?>">
 <head>
   <meta charset="utf-8">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="<?= e($config['seo']['robots'] ?? 'noindex, nofollow') ?>">
   <title><?= e($config['seo']['title']) ?></title>
@@ -74,8 +75,8 @@ $schemaRestaurant = [
   <!-- Folha de estilos própria -->
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <?php if (!empty($config['publishing']['enable_schema_restaurant'])): ?>
-  <!-- Dados estruturados Restaurant (emitidos exclusivamente mediante homologação de publicação) -->
+  <?php if (!empty($config['publishing']['approved']) && !empty($config['publishing']['enable_schema_restaurant'])): ?>
+  <!-- Dados estruturados Restaurant (emitidos exclusivamente mediante aprovação explícita de publicação) -->
   <script type="application/ld+json">
 <?= json_encode($schemaRestaurant, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
   </script>

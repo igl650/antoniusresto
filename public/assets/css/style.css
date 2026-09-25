@@ -31,6 +31,9 @@
   /* Transições suaves */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Imagem hero centralizada (único ponto de configuração para desktop e mobile) */
+  --hero-bg-image: url('../img/hero-conceitual.png');
 }
 
 /* Reset e fundamentos */
@@ -133,6 +136,7 @@ img {
   gap: 12px;
   color: var(--rust);
   flex-shrink: 0;
+  min-height: 44px;
 }
 
 .brand-mark {
@@ -188,15 +192,17 @@ img {
   flex-shrink: 0;
 }
 
-/* Botão toggle do menu móvel */
+/* Botão toggle do menu móvel (área de toque confortável de pelo menos 44x44px) */
 .nav-toggle {
   display: none;
   background: transparent;
   border: 1px solid var(--line);
-  padding: 6px;
+  padding: 10px;
   cursor: pointer;
-  width: 38px;
-  height: 40px;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -210,9 +216,14 @@ img {
   border-color: var(--rust);
 }
 
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 .toggle-bar {
   display: block;
-  width: 18px;
+  width: 20px;
   height: 2px;
   background-color: var(--rust);
   transition: transform var(--transition-normal), opacity var(--transition-normal);
@@ -304,7 +315,7 @@ button:focus-visible {
       rgba(22, 11, 6, 0.17) 68%,
       rgba(22, 11, 6, 0.06) 100%
     ),
-    url('../img/hero-conceitual.png') center/cover no-repeat;
+    var(--hero-bg-image) center/cover no-repeat;
   display: flex;
   align-items: center;
   color: var(--white);
@@ -633,11 +644,14 @@ button:focus-visible {
 
 /* Tablet (até 900px) */
 @media (max-width: 900px) {
-  .nav-toggle {
-    display: flex;
+  /* Quando JavaScript está ATIVO (.js): menu recolhível controlado pelo botão */
+  .js .nav-toggle {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
   }
 
-  .nav {
+  .js .nav {
     display: none;
     position: absolute;
     top: 100%;
@@ -646,19 +660,67 @@ button:focus-visible {
     background-color: var(--white);
     border-bottom: 1px solid var(--line);
     flex-direction: column;
-    padding: 20px 24px;
-    gap: 16px;
+    padding: 16px 24px;
+    gap: 8px;
     box-shadow: 0 10px 24px rgba(43, 32, 28, 0.08);
   }
 
-  .nav.is-open {
+  .js .nav.is-open {
     display: flex;
   }
 
-  .nav a {
+  .js .nav a {
     font-size: 1.05rem;
     padding: 10px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid #f2ede7;
+  }
+
+  /* Quando JavaScript está DESATIVADO (.no-js): navegação funcional no fluxo padrão */
+  .no-js .nav-toggle {
+    display: none !important;
+  }
+
+  .no-js .header-inner {
+    flex-wrap: wrap;
+    min-height: auto;
+    padding-top: 10px;
+    justify-content: space-between;
+  }
+
+  .no-js .brand {
+    order: 1;
+  }
+
+  .no-js .header-actions {
+    order: 2;
+  }
+
+  .no-js .nav {
+    display: flex !important;
+    position: static;
+    order: 3;
+    width: 100%;
+    flex-basis: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 14px;
+    padding: 8px 0 10px;
+    border-top: 1px solid var(--line);
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .no-js .nav a {
+    font-size: 0.88rem;
+    padding: 6px 10px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: none;
   }
 
   .intro,
@@ -689,10 +751,10 @@ button:focus-visible {
   }
 }
 
-/* Mobile (até 650px / 390px) */
+/* Mobile (até 650px / 390px / 320px) */
 @media (max-width: 650px) {
   .wrap {
-    width: min(calc(100% - 24px), 1180px);
+    width: min(calc(100% - 20px), 1180px);
   }
 
   .topline {
@@ -703,21 +765,24 @@ button:focus-visible {
 
   .header-inner {
     min-height: 64px;
-    gap: 8px;
+    gap: 6px;
     justify-content: space-between;
   }
 
   .brand {
-    gap: 8px;
+    gap: 6px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .brand-mark {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
   }
 
   .brand-name {
-    font-size: 1.25rem;
+    font-size: clamp(1.05rem, 5vw, 1.25rem);
     letter-spacing: -0.03em;
   }
 
@@ -728,18 +793,27 @@ button:focus-visible {
 
   .header-actions {
     gap: 6px;
+    display: flex;
+    align-items: center;
   }
 
+  /* Área de toque de pelo menos 44x44px garantida */
   .header-btn {
-    padding: 6px 9px;
+    padding: 0 10px;
     font-size: 0.72rem;
-    min-height: 34px;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-toggle {
-    width: 34px;
-    height: 34px;
-    padding: 5px;
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
   }
 
   .eyebrow {
@@ -748,6 +822,7 @@ button:focus-visible {
     line-height: 1.35;
   }
 
+  /* Hero no mobile consome a mesma variável centralizada --hero-bg-image */
   .hero {
     min-height: 560px;
     background: linear-gradient(
@@ -755,7 +830,7 @@ button:focus-visible {
         rgba(22, 11, 6, 0.88) 0%,
         rgba(22, 11, 6, 0.44) 100%
       ),
-      url('../img/hero-conceitual.png') 60% center/cover no-repeat;
+      var(--hero-bg-image) 60% center/cover no-repeat;
   }
 
   .hero-content {
@@ -857,6 +932,51 @@ button:focus-visible {
   .footer-inner > * {
     display: block;
     margin-bottom: 10px;
+  }
+}
+
+/* Telas ultracompactas (até 360px / 320px) */
+@media (max-width: 360px) {
+  .wrap {
+    width: min(calc(100% - 16px), 1180px);
+  }
+
+  .header-inner {
+    gap: 4px;
+  }
+
+  .brand {
+    gap: 4px;
+    min-height: 44px;
+  }
+
+  .brand-mark {
+    width: 22px;
+    height: 22px;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
+  .header-btn {
+    padding: 0 8px;
+    font-size: 0.70rem;
+    min-height: 44px;
+  }
+
+  .no-js .nav {
+    gap: 4px 8px;
+  }
+
+  .no-js .nav a {
+    font-size: 0.80rem;
+    padding: 4px 6px;
+    min-height: 44px;
   }
 }
 
